@@ -10,12 +10,12 @@
 module.exports = {
   pathPrefix: "/billiambob.github.io",
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `BillBobBlogs`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `BilliamBob`,
+      summary: `who bills bobbingly.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `an EECS201 specification following blog.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
       twitter: `kylemathews`,
