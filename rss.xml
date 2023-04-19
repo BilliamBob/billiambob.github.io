@@ -1,127 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[an EECS201 specification following blog.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 18 Apr 2023 23:56:12 GMT</lastBuildDate><item><title><![CDATA[Hsquared's Multiplicative Chernoff Bounds]]></title><description><![CDATA[Multiplicative Chernoff bounds let us reason about the deviation of a random variable from its expectation, much like Markov's inequality…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/h2-math/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/h2-math/</guid><pubDate>Sat, 18 Mar 2023 22:12:03 GMT</pubDate><content:encoded>&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Multiplicative Chernoff bounds&lt;/strong&gt; let us reason about the deviation of a random variable from its expectation, much like Markov&apos;s inequality.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!info] Markov&apos;s Inequality&lt;/p&gt;
-&lt;p&gt;For a nonnegative random variable $X$ and $v &gt; 0$,
-$$
-\text{Pr}[X \geq v] \leq \frac{\mathbb{E}[X]}{v}
-$$&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;To establish the bound, first let $X = X_{1} + \dots + X_{n}$, where $X_{i}$ is an independent indicator random variable with $\mathbb{E}[X_{i}] = p_{i}$ and $\mu = \mathbb{E}[X] = \sum_{i} p_{i}$.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!success] Upper-tail Multiplicative Chernoff Bound&lt;/p&gt;
-&lt;p&gt;$$
-\text{Pr}[X \geq (1 + \delta)\mu] \leq \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-$$&lt;/p&gt;
-&lt;p&gt;for some $\delta &gt; 0$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!success] Lower-tail Multiplicative Chernoff Bound&lt;/p&gt;
-&lt;p&gt;$$
-\text{Pr}[X \leq (1 - \delta)\mu] \leq \left(\frac{e^{-\delta}}{(1 - \delta)^{1 - \delta}} \right)^\mu
-$$&lt;/p&gt;
-&lt;p&gt;for some $\delta$ where $0 &amp;#x3C; \delta &amp;#x3C; 1$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4&gt;Proof of Upper-tail Multiplicative Chernoff Bound&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Uses the &lt;em&gt;Chernoff bounding technique&lt;/em&gt; - reasoning about $e^{tX}$ instead of $X$, since small deviations in $X$ correspond to large deviations in $e^{tX}$&lt;/li&gt;
-&lt;li&gt;Notice that $X \geq (1 + \delta)\mu$ when $e^{tX} \geq e^{t(1 + \delta)\mu}$ for any $t \geq 0$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So we have:
-$$
-\text{Pr}[X \geq (1 + \delta)\mu] = \text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}]
-$$
-Applying Markov&apos;s inequality, we see that:
-$$
-\text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq \frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}}
-$$
-We can then simplify the expression $\frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}}$ as follows:
-$$
-\begin{align}
-\frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}} = \mathbb{E}[e^{tX}] * e^{-t(1 + \delta)\mu} \
-= e^{-t(1 + \delta)\mu} * \mathbb{E}[e^{t(X_{1} + \dots + X_{n})}] \
-= e^{-t(1 + \delta)\mu} * \mathbb{E}\left[\prod_{i} e^{tX_{i}} \right]
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Observe that for independent random variables $Y$ and $Z$, $\mathbb{E}[YZ] = \mathbb{E}[Y] * \mathbb{E}[Z]$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to get:
-$$
-e^{-t(1 + \delta)\mu} * \mathbb{E}\left[\prod_{i}e^{tX_{i}} \right] = e^{-t(1 + \delta)\mu} * \prod_{i} \mathbb{E}[e^{tX_{i}}]
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Recall that $\text{Pr}[X_{i} = 1] = p_{i}$ and $\text{Pr}[X_{i} = 0] = 1 - p_{i}$. When $X_{i} = 1$, $e^{tX_{i}} = e^t$, and when $X_{i} = 0$, $e^{tX_{i}} = 1$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to see that:
-$$
-\begin{align}
-\mathbb{E}[e^{tX_{i}}] = \text{Pr}[e^{tX_{i}} = e^t] * e^t + \text{Pr}[e^{tX_{i}} = 1] * 1 \
-= e^{t}p_{i} + 1 - p_{i} \
-= 1 + p_{i}(e^t - 1)
-\end{align}
-$$
-Returning to our application of Markov&apos;s inequality, we see that:
-$$
-\text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq e^{-t(1 + \delta)u} * \prod_{i} \left(1 + p_{i}(e^t - 1)\right)
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Observe that for all $x \in \mathbb{R}$, $1 + x \leq e^x$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to get:
-$$
-1 + p_{i}(e^t - 1) \leq e^{p_{i}(e^t - 1)}
-$$
-Applying this to our previously computed upper bound, we see that:
-$$
-e^{-t(1 + \delta)\mu} * \prod_{i} \left(1 + p_{i}(e^t - 1) \right) \leq e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)}
-$$
-$e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)}$ can be further simplified as follows:
-$$
-\begin{align}
-e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)} = e^{-t(1 + \delta)\mu} * e^{(e^t - 1)\sum_{i} p_{i}} \
-= e^{-t(1 + \delta)\mu} * e^{(e^t - 1)\mu} \
-= e^{\mu(e^t - 1 -t(1 + \delta))}
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;To find a tight bound, we want to minimize the value of $f(t) = e^t - 1 - t(1 + \delta)$ - start by taking the derivative and setting it to $0$ to find an extremum, then take the second derivative and see if it is positive (which confirms that the extremum is a minimum as opposed to a maximum)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;$$
-\begin{align}
-f&apos;(t) = e^t - (1 + \delta) = 0 \
-e^t = 1 + \delta \
-t = \ln(1 + \delta)
-\end{align}
-$$
-Computing the second derivative, we see that:
-$$
-\begin{align}
-f&apos;&apos;(t) = e^t \
-= e^{\ln(1 + \delta)} \
-= 1 + \delta &gt; 0 \
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$t$ that minimizes the Multiplicative Chernoff bound is $1 + \delta$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Substitute $t = 1 + \delta$ into our previously computed bound expression to get:
-$$
-\begin{align}
-e^{\mu(e^t - 1 - t(1 + \delta))} \geq e^{\mu(e^{\ln(1 + \delta)} - 1 - \ln(1 + \delta)(1 + \delta))} \
-= e^{\mu((1 + \delta) - 1 - \ln(1 + \delta)(1 + \delta))} \
-= e^{\mu(\delta - \ln(1 + \delta)(1 + \delta))} \
-= (e^{\delta - \ln(1 + \delta)(1 + \delta)})^\mu \
-= \left(\frac{e^\delta}{e^{\ln(1 + \delta)(1 + \delta)}}\right)^\mu \
-= \left(\frac{e^\delta}{(e^{\ln(1 + \delta)})^{1 + \delta}} \right)^\mu \
-= \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-\end{align}
-$$
-In the end, we can now conclude that:
-$$
-\text{Pr}[X \geq (1 + \delta)\mu] = \text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-$$&lt;/p&gt;</content:encoded></item><item><title><![CDATA[first-post]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[an EECS201 specification following blog.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 19 Apr 2023 00:07:30 GMT</lastBuildDate><item><title><![CDATA[first-post]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/first-post/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/first-post/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
 right at the coast of the Semantics, a large language ocean. A small river named
@@ -238,7 +115,7 @@ firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/765b60166e1b4b8f4d254af570e4f787/1a867/Untitled.png&quot;
+    href=&quot;/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/1a867/Untitled.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -251,13 +128,13 @@ firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Chinese Kirby&quot;
         title=&quot;&quot;
-        src=&quot;/static/765b60166e1b4b8f4d254af570e4f787/f058b/Untitled.png&quot;
-        srcset=&quot;/static/765b60166e1b4b8f4d254af570e4f787/c26ae/Untitled.png 158w,
-/static/765b60166e1b4b8f4d254af570e4f787/6bdcf/Untitled.png 315w,
-/static/765b60166e1b4b8f4d254af570e4f787/f058b/Untitled.png 630w,
-/static/765b60166e1b4b8f4d254af570e4f787/40601/Untitled.png 945w,
-/static/765b60166e1b4b8f4d254af570e4f787/78612/Untitled.png 1260w,
-/static/765b60166e1b4b8f4d254af570e4f787/1a867/Untitled.png 1998w&quot;
+        src=&quot;/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/f058b/Untitled.png&quot;
+        srcset=&quot;/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/c26ae/Untitled.png 158w,
+/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/6bdcf/Untitled.png 315w,
+/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/f058b/Untitled.png 630w,
+/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/40601/Untitled.png 945w,
+/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/78612/Untitled.png 1260w,
+/billiambob.github.io/static/765b60166e1b4b8f4d254af570e4f787/1a867/Untitled.png 1998w&quot;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
