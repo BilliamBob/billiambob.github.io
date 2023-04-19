@@ -1,13 +1,8 @@
 ---
-title: My Second Post!
-date: "2015-05-06T23:46:37.121Z"
+title: Website project update!
+date: "2023-04-17T23:46:37.121Z"
 ---
 
-Wow! I love blogging so much already.
+Here's a blogpost... This sure has been a project. Going through with tutorial code is dangerous, be careful out there! This time I was trying to test if the links worked to the blog posts but it didn't at all!
 
-Did you know that "despite its name, salted duck eggs can also be made from
-chicken eggs, though the taste and texture will be somewhat different, and the
-egg yolk will be less rich."?
-([Wikipedia Link](https://en.wikipedia.org/wiki/Salted_duck_egg))
-
-Yeah, I didn't either.
+Remember for to right click and links and "Copy Link Address" to see if the path prefix is really needed.

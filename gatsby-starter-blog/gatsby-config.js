@@ -7,19 +7,26 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+module.exports.createPages = async ({ graphql, actions }) => {
+  const { createRedirect } = actions
+
+  createRedirect({
+    fromPath: `/blog`,
+    toPath: `/`,
+  })
+}
+
 module.exports = {
-  pathPrefix: "/billiambob.github.io",
+  pathPrefix: ``,
   siteMetadata: {
     title: `BillBobBlogs`,
     author: {
       name: `BilliamBob`,
-      summary: `who bills bobbingly.`,
+      summary: `who bills bobbingly. `,
     },
     description: `an EECS201 specification following blog.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
-    social: {
-      twitter: `kylemathews`,
-    },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -119,7 +126,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/profile-pic.png`, // This path is relative to the root of the site.
       },
     },
   ],
