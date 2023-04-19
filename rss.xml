@@ -1,129 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[an EECS201 specification following blog.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 19 Apr 2023 01:15:34 GMT</lastBuildDate><item><title><![CDATA[H2 Math]]></title><description><![CDATA[Multiplicative Chernoff bounds let us reason about the deviation of a random variable from its expectation, much like Markov's inequality…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io//h2-math/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io//h2-math/</guid><pubDate>Tue, 18 Apr 2023 23:12:03 GMT</pubDate><content:encoded>&lt;ul&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[an EECS201 specification following blog.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 19 Apr 2023 01:21:59 GMT</lastBuildDate><item><title><![CDATA[H2 Math]]></title><description><![CDATA[Multiplicative Chernoff bounds let us reason about the deviation of a random variable from its expectation, much like Markov's inequality.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/h2-math/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/h2-math/</guid><pubDate>Tue, 18 Apr 2023 23:12:03 GMT</pubDate><content:encoded>&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Multiplicative Chernoff bounds&lt;/strong&gt; let us reason about the deviation of a random variable from its expectation, much like Markov&apos;s inequality.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!info] Markov&apos;s Inequality&lt;/p&gt;
-&lt;p&gt;For a nonnegative random variable $X$ and $v &gt; 0$,
-$$
-\text{Pr}[X \geq v] \leq \frac{\mathbb{E}[X]}{v}
-$$&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;To establish the bound, first let $X = X_{1} + \dots + X_{n}$, where $X_{i}$ is an independent indicator random variable with $\mathbb{E}[X_{i}] = p_{i}$ and $\mu = \mathbb{E}[X] = \sum_{i} p_{i}$.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!success] Upper-tail Multiplicative Chernoff Bound&lt;/p&gt;
-&lt;p&gt;$$
-\text{Pr}[X \geq (1 + \delta)\mu] \leq \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-$$&lt;/p&gt;
-&lt;p&gt;for some $\delta &gt; 0$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!success] Lower-tail Multiplicative Chernoff Bound&lt;/p&gt;
-&lt;p&gt;$$
-\text{Pr}[X \leq (1 - \delta)\mu] \leq \left(\frac{e^{-\delta}}{(1 - \delta)^{1 - \delta}} \right)^\mu
-$$&lt;/p&gt;
-&lt;p&gt;for some $\delta$ where $0 &amp;#x3C; \delta &amp;#x3C; 1$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4&gt;Proof of Upper-tail Multiplicative Chernoff Bound&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Uses the &lt;em&gt;Chernoff bounding technique&lt;/em&gt; - reasoning about $e^{tX}$ instead of $X$, since small deviations in $X$ correspond to large deviations in $e^{tX}$&lt;/li&gt;
-&lt;li&gt;Notice that $X \geq (1 + \delta)\mu$ when $e^{tX} \geq e^{t(1 + \delta)\mu}$ for any $t \geq 0$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So we have:
-$$
-\text{Pr}[X \geq (1 + \delta)\mu] = \text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}]
-$$
-Applying Markov&apos;s inequality, we see that:
-$$
-\text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq \frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}}
-$$
-We can then simplify the expression $\frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}}$ as follows:
-$$
-\begin{align}
-\frac{\mathbb{E}[e^{tX}]}{e^{t(1 + \delta)\mu}} = \mathbb{E}[e^{tX}] * e^{-t(1 + \delta)\mu} \
-= e^{-t(1 + \delta)\mu} * \mathbb{E}[e^{t(X_{1} + \dots + X_{n})}] \
-= e^{-t(1 + \delta)\mu} * \mathbb{E}\left[\prod_{i} e^{tX_{i}} \right]
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Observe that for independent random variables $Y$ and $Z$, $\mathbb{E}[YZ] = \mathbb{E}[Y] * \mathbb{E}[Z]$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to get:
-$$
-e^{-t(1 + \delta)\mu} * \mathbb{E}\left[\prod_{i}e^{tX_{i}} \right] = e^{-t(1 + \delta)\mu} * \prod_{i} \mathbb{E}[e^{tX_{i}}]
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Recall that $\text{Pr}[X_{i} = 1] = p_{i}$ and $\text{Pr}[X_{i} = 0] = 1 - p_{i}$. When $X_{i} = 1$, $e^{tX_{i}} = e^t$, and when $X_{i} = 0$, $e^{tX_{i}} = 1$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to see that:
-$$
-\begin{align}
-\mathbb{E}[e^{tX_{i}}] = \text{Pr}[e^{tX_{i}} = e^t] * e^t + \text{Pr}[e^{tX_{i}} = 1] * 1 \
-= e^{t}p_{i} + 1 - p_{i} \
-= 1 + p_{i}(e^t - 1)
-\end{align}
-$$
-Returning to our application of Markov&apos;s inequality, we see that:
-$$
-\text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq e^{-t(1 + \delta)u} * \prod_{i} \left(1 + p_{i}(e^t - 1)\right)
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Observe that for all $x \in \mathbb{R}$, $1 + x \leq e^x$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use the above fact to get:
-$$
-1 + p_{i}(e^t - 1) \leq e^{p_{i}(e^t - 1)}
-$$
-Applying this to our previously computed upper bound, we see that:
-$$
-e^{-t(1 + \delta)\mu} * \prod_{i} \left(1 + p_{i}(e^t - 1) \right) \leq e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)}
-$$
-$e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)}$ can be further simplified as follows:
-$$
-\begin{align}
-e^{-t(1 + \delta)\mu} * \prod_{i} e^{p_{i}(e^t - 1)} = e^{-t(1 + \delta)\mu} * e^{(e^t - 1)\sum_{i} p_{i}} \
-= e^{-t(1 + \delta)\mu} * e^{(e^t - 1)\mu} \
-= e^{\mu(e^t - 1 -t(1 + \delta))}
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;To find a tight bound, we want to minimize the value of $f(t) = e^t - 1 - t(1 + \delta)$ - start by taking the derivative and setting it to $0$ to find an extremum, then take the second derivative and see if it is positive (which confirms that the extremum is a minimum as opposed to a maximum)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;$$
-\begin{align}
-f&apos;(t) = e^t - (1 + \delta) = 0 \
-e^t = 1 + \delta \
-t = \ln(1 + \delta)
-\end{align}
-$$
-Computing the second derivative, we see that:
-$$
-\begin{align}
-f&apos;&apos;(t) = e^t \
-= e^{\ln(1 + \delta)} \
-= 1 + \delta &gt; 0 \
-\end{align}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$t$ that minimizes the Multiplicative Chernoff bound is $1 + \delta$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Substitute $t = 1 + \delta$ into our previously computed bound expression to get:
-$$
-\begin{align}
-e^{\mu(e^t - 1 - t(1 + \delta))} \geq e^{\mu(e^{\ln(1 + \delta)} - 1 - \ln(1 + \delta)(1 + \delta))} \
-= e^{\mu((1 + \delta) - 1 - \ln(1 + \delta)(1 + \delta))} \
-= e^{\mu(\delta - \ln(1 + \delta)(1 + \delta))} \
-= (e^{\delta - \ln(1 + \delta)(1 + \delta)})^\mu \
-= \left(\frac{e^\delta}{e^{\ln(1 + \delta)(1 + \delta)}}\right)^\mu \
-= \left(\frac{e^\delta}{(e^{\ln(1 + \delta)})^{1 + \delta}} \right)^\mu \
-= \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-\end{align}
-$$
-In the end, we can now conclude that:
-$$
-\text{Pr}[X \geq (1 + \delta)\mu] = \text{Pr}[e^{tX} \geq e^{t(1 + \delta)\mu}] \leq \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}} \right)^\mu
-$$&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Website project update!]]></title><description><![CDATA[Here's a blogpost... This sure has been a project. Going through with tutorial code is dangerous, be careful out there! This time I was…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io//my-second-post/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io//my-second-post/</guid><pubDate>Mon, 17 Apr 2023 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Here&apos;s a blogpost... This sure has been a project. Going through with tutorial code is dangerous, be careful out there! This time I was trying to test if the links worked to the blog posts but it didn&apos;t at all!&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Website project update!]]></title><description><![CDATA[Here's a blogpost... This sure has been a project. Going through with tutorial code is dangerous, be careful out there! This time I was…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/my-second-post/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/my-second-post/</guid><pubDate>Mon, 17 Apr 2023 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Here&apos;s a blogpost... This sure has been a project. Going through with tutorial code is dangerous, be careful out there! This time I was trying to test if the links worked to the blog posts but it didn&apos;t at all!&lt;/p&gt;
 &lt;p&gt;Remember for to right click and links and &quot;Copy Link Address&quot; to see if the path prefix is really needed.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[first-post]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io//first-post/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io//first-post/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
+Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/first-post/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/first-post/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
 right at the coast of the Semantics, a large language ocean. A small river named
 Duden flows by their place and supplies it with the necessary regelialia.&lt;/p&gt;
@@ -214,7 +93,7 @@ would be the word &quot;and&quot; and the Little Blind Text should turn around a
 to its own, safe country. But nothing the copy said could convince her and so it
 didn’t take long until a few insidious Copy Writers ambushed her, made her drunk
 with Longe and Parole and dragged her into their agency, where they abused her
-for their projects again and again.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I'm sure I'll write a lot more interesting things in the future. Oh, and here's a…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io//hello-world/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io//hello-world/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;
+for their projects again and again.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I'm sure I'll write a lot more interesting things in the future. Oh, and here's a…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/hello-world/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/hello-world/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;
 &lt;p&gt;I&apos;m sure I&apos;ll write a lot more interesting things in the future.&lt;/p&gt;
 &lt;p&gt;Oh, and here&apos;s a great quote from this Wikipedia on
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;salted duck eggs&lt;/a&gt;.&lt;/p&gt;
